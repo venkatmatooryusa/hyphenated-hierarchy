@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hyphenated Hierarchy: An Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles for Dark Mode and Vibrant Accents -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #f8fafc; /* slate-50 (Near white) */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #a3e635; /* lime-400 */
+        }
+        .nav-link.active {
+            color: #d9f991; /* lime-200 */
+            border-bottom-color: #d9f991;
+            font-weight: 600;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            background-color: #1e293b; /* slate-800 */
+        }
+        /* Custom card styling for high-contrast look */
+        .concept-card {
+            background-color: #1e293b; /* slate-800 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(163, 230, 53, 0.2), 0 4px 6px -4px rgba(163, 230, 53, 0.1);
+        }
+        .masala-dabba-accent { border-top-color: #f59e0b; } /* Amber Accent */
+        .air-fryer-accent { border-top-color: #06b6d4; } /* Cyan Accent (Tech/Speed) */
+        .fusion-accent { border-top-color: #a3e635; } /* Lime Accent (Mindful Fusion) */
+
+        /* Quiz Radio Button Styling */
+        input[type="radio"]:checked + span {
+            color: #a3e635; /* lime-400 */
+            font-weight: 600;
+        }
+        /* Hover effect for the submit button - gives a subtle glow */
+        #submit-quiz-btn:hover {
+            text-shadow: 0 0 10px rgba(163, 230, 53, 0.8), 0 0 20px rgba(163, 230, 53, 0.4);
+        }
+        /* Hover effect for the dynamic CTA button */
+        #dynamic-cta:hover {
+            background-color: #06b6d4; /* Cyan accent for interactivity */
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.4), 0 4px 6px -4px rgba(6, 182, 212, 0.2);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 shadow-lg shadow-slate-900/50 border-b border-slate-700">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-wider">The Hyphenated <span class="text-lime-400">Hierarchy</span></h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#core" class="nav-link text-slate-300 font-medium border-b-2 border-transparent">Core Story</a>
+                <a href="#worlds" class="nav-link text-slate-300 font-medium border-b-2 border-transparent">Worlds</a>
+                <a href="#quiz" class="nav-link text-slate-300 font-medium border-b-2 border-transparent">Assessment</a>
+                <a href="#fusion" class="nav-link text-slate-300 font-medium border-b-2 border-transparent">Fusion</a>
+                <a href="#manifesto" class="nav-link text-slate-300 font-medium border-b-2 border-transparent">Manifesto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <section id="intro" class="text-center mb-20 md:mb-32 p-8 md:p-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl shadow-2xl shadow-slate-900/70 border border-slate-700">
+            <!-- IMAGE: Hyphenated Hierarchy 2.jpg -->
+            <img 
+                src="uploaded:Hyphenated Hierarchy 2.jpg-72071d3c-65eb-4ab1-a41c-12eb2cffea5e" 
+                alt="A visual representation of the Hyphenated Hierarchy concept, showing two converging paths." 
+                class="w-full h-auto max-h-96 object-cover rounded-xl shadow-xl mb-8 border-2 border-slate-600 mx-auto" 
+                onerror="this.onerror=null;this.src='https://placehold.co/800x300/1e293b/a3e635?text=Hyphenated+Hierarchy+Concept';" 
+                loading="lazy">
+            <h2 class="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight leading-tight">
+                Your Life Is a <span class="text-lime-400">Hyphenated</span> Life.
+            </h2>
+            <p class="max-w-4xl mx-auto text-xl md:text-2xl text-slate-300 font-light mb-10">
+                You're navigating two worlds: the stability of <strong>Masala Dabba</strong> tradition, and the velocity of <strong>Air Fryer</strong> innovation. This is your blueprint for balance.
+            </p>
+            <a href="#quiz" class="inline-block bg-lime-400 text-slate-900 font-bold py-3 px-8 rounded-full text-lg shadow-xl hover:bg-lime-300 transition duration-300 transform hover:scale-105">
+                Take the Hybrid Pressure Cooker Assessment
+            </a>
+        </section>
+        
+        <!-- Core Story with stylized, dark cards -->
+        <section id="core" class="mb-20 md:mb-32 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-extrabold text-white">The Core Story: Conflict & Context</h3>
+                <p class="max-w-3xl mx-auto mt-3 text-slate-400 text-lg">
+                    The struggle is real. Success means finding the perfect 'Masala' for the 'Fryer'.
+                </p>
+            </div>
+            <!-- IMAGE: MD vs AF.jpg -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <img 
+                    src="uploaded:MD vs AF.jpg-2c860c1c-6ac8-422c-a3fb-b6b679121bf5" 
+                    alt="A comparison graphic between Masala Dabba and Air Fryer concepts." 
+                    class="w-full h-auto max-h-72 object-cover rounded-xl shadow-xl border-2 border-slate-600" 
+                    onerror="this.onerror=null;this.src='https://placehold.co/800x250/1e293b/a3e635?text=Masala+Dabba+vs+Air+Fryer';" 
+                    loading="lazy">
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8 text-left max-w-6xl mx-auto">
+                
+                <!-- Concept 1: The Masala Dabba -->
+                <div class="concept-card masala-dabba-accent p-8 rounded-xl border-t-4 shadow-xl">
+                    <span class="text-4xl mb-4 block">🌶️</span>
+                    <h4 class="text-2xl font-black text-amber-400 mb-3">The Masala Dabba</h4>
+                    <p class="text-slate-200 font-semibold mb-4">Traditional Values & Prestige (The Master Recipe)</p>
+                    <ul class="text-base text-slate-400 space-y-2">
+                        <li><strong>Priority:</strong> Security, stability, and family expectations.</li>
+                        <li><strong>Path:</strong> Slow, deep, and deliberate mastery.</li>
+                        <li><strong>Careers:</strong> Medicine, Engineering, Finance, Law.</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 2: The Air Fryer -->
+                <div class="concept-card air-fryer-accent p-8 rounded-xl border-t-4 shadow-xl">
+                    <span class="text-4xl mb-4 block">⚡</span>
+                    <h4 class="text-2xl font-black text-cyan-400 mb-3">The Air Fryer</h4>
+                    <p class="text-slate-200 font-semibold mb-4">Modern Corporate Speed (The Flexible Menu)</p>
+                    <ul class="text-base text-slate-400 space-y-2">
+                        <li><strong>Priority:</strong> Innovation, disruption, rapid scaling, and personal brand.</li>
+                        <li><strong>Path:</strong> High-efficiency, fast-paced, move-fast-and-break-things.</li>
+                        <li><strong>Careers:</strong> Tech Startups, VC, Creative Fields.</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 3: The Mindful Fusion -->
+                <div class="concept-card fusion-accent p-8 rounded-xl border-t-4 shadow-xl">
+                    <span class="text-4xl mb-4 block">⚖️</span>
+                    <h4 class="text-2xl font-black text-lime-400 mb-3">The Mindful Fusion</h4>
+                    <p class="text-slate-200 font-semibold mb-4">The Goal: Sustainable Fulfillment</p>
+                    <ul class="text-base text-slate-400 space-y-2">
+                        <li><strong>Priority:</strong> Intentional combination of purpose and efficiency.</li>
+                        <li><strong>Path:</strong> Creating a career that reduces anxiety and burnout.</li>
+                        <li><strong>Outcome:</strong> Success defined by autonomy, not external titles.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <hr class="border-slate-800 my-16">
+        
+        <!-- Comparison Section -->
+        <section id="worlds" class="mb-20 md:mb-32 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-extrabold text-white">Navigating the Two Worlds</h3>
+                <p class="max-w-2xl mx-auto mt-3 text-slate-400">Select a stage to see the contrasting pressures you face.</p>
+            </div>
+            <!-- IMAGE: ABCD Air Fryer banner.jpg -->
+            <div class="max-w-4xl mx-auto mb-10">
+                <img 
+                    src="uploaded:ABCD Air Fryer banner.jpg-59375a7e-1b61-43d6-b54a-56edc15d52af" 
+                    alt="ABCD Air Fryer banner representing the American Corporate Speed." 
+                    class="w-full h-auto max-h-60 object-cover rounded-xl shadow-xl border-2 border-slate-600" 
+                    onerror="this.onerror=null;this.src='https://placehold.co/800x200/1e293b/a3e635?text=Air+Fryer+Lifestyle';" 
+                    loading="lazy">
+            </div>
+
+            <div class="flex justify-center space-x-3 md:space-x-6 mb-10">
+                <button onclick="updateComparison('highSchool')" class="comparison-btn bg-lime-400 text-slate-900 font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-95">High School</button>
+                <button onclick="updateComparison('college')" class="comparison-btn bg-slate-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-95">College</button>
+                <button onclick="updateComparison('workplace')" class="comparison-btn bg-slate-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-95">Workplace</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-slate-800 p-8 rounded-xl shadow-xl border-t-4 border-amber-400">
+                    <h4 class="text-2xl font-extrabold mb-4 text-center text-amber-400">🌶️ The Masala Dabba</h4>
+                    <p class="text-center text-slate-400 mb-6 font-medium">The Traditional Indian Value System</p>
+                    <div id="masala-dabba-content" class="text-slate-300 space-y-4">
+                        <!-- Content injected here -->
+                    </div>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-xl shadow-xl border-t-4 border-cyan-400">
+                    <h4 class="text-2xl font-extrabold mb-4 text-center text-cyan-400">⚡ The Air Fryer</h4>
+                    <p class="text-center text-slate-400 mb-6 font-medium">The Fast-Paced American Corporate System</p>
+                    <div id="air-fryer-content" class="text-slate-300 space-y-4">
+                        <!-- Content injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-slate-800 my-16">
+        
+        <!-- Quiz Section -->
+        <section id="quiz" class="mb-20 md:mb-32 scroll-mt-20">
+            <div class="bg-slate-800 p-8 md:p-12 rounded-xl shadow-2xl border border-slate-700 max-w-4xl mx-auto">
+                <!-- IMAGE: Hidden Costs.jpg -->
+                <div class="max-w-xs mx-auto mb-10">
+                    <img 
+                        src="uploaded:Hidden Costs.jpg-2ce35f95-032c-4c3a-8dc4-63dd08eeccea" 
+                        alt="Graphic representing the hidden costs of anxiety and burnout." 
+                        class="w-full h-auto object-contain rounded-lg" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/1e293b/a3e635?text=Hidden+Costs';" 
+                        loading="lazy">
+                </div>
+                
+                <div class="text-center mb-10">
+                    <h3 class="text-4xl font-bold text-white">The Hybrid Pressure Cooker Assessment</h3>
+                    <p class="max-w-2xl mx-auto mt-3 text-slate-400">Discover where the Traditional Values and Modern Demands clash in your daily life.</p>
+                </div>
+                <!-- Error Message Box -->
+                <div id="quiz-message" class="hidden p-4 mb-6 text-sm text-red-400 bg-red-900/50 rounded-lg border border-red-700 font-medium" role="alert"></div>
+                
+                <form id="quiz-form">
+                </form>
+                <div class="text-center mt-10">
+                    <button id="submit-quiz-btn" onclick="submitQuiz()" class="bg-lime-400 text-slate-900 font-black py-3 px-10 rounded-full shadow-xl transition duration-300 text-xl transform hover:scale-105">
+                        Calculate My Fusion Score
+                    </button>
+                </div>
+                <div id="quiz-result" class="hidden mt-12 text-center">
+                    <h4 id="result-title" class="text-3xl font-black text-lime-400 mb-4"></h4>
+                    <p id="result-description" class="max-w-2xl mx-auto text-slate-300 mb-8"></p>
+                    <div class="chart-container">
+                        <canvas id="resultChart"></canvas>
+                    </div>
+                    <!-- Dynamic Call to Action -->
+                    <a id="dynamic-cta" href="#fusion" class="mt-8 inline-block bg-cyan-400 text-slate-900 font-bold py-3 px-8 rounded-full text-lg shadow-xl transition duration-300 transform hover:scale-105">
+                        Start My Fusion Strategy
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <hr class="border-slate-800 my-16">
+
+        <!-- Fusion Framework Section -->
+        <section id="fusion" class="mb-20 md:mb-32 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-extrabold text-white">The Mindful Fusion Framework</h3>
+                <p class="max-w-2xl mx-auto mt-3 text-slate-400">An intentional, selective blending to build your sustainable path to fulfillment.</p>
+            </div>
+            <!-- IMAGE: The Mindful Fusion.jpg -->
+            <div class="max-w-3xl mx-auto mb-12">
+                <img 
+                    src="uploaded:The Mindful Fusion.jpg-aed98b6c-5be0-493f-b800-f0211ea76bb5" 
+                    alt="A graphic representing the successful Mindful Fusion of two cultural paths." 
+                    class="w-full h-auto max-h-80 object-cover rounded-xl shadow-xl border-2 border-lime-500" 
+                    onerror="this.onerror=null;this.src='https://placehold.co/800x280/1e293b/a3e635?text=The+Mindful+Fusion';" 
+                    loading="lazy">
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-5">
+                <!-- Accordion 1 -->
+                <div class="accordion-item rounded-xl overflow-hidden shadow-2xl border border-lime-500/50" id="accordion-dabba">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center bg-slate-700/50 hover:bg-slate-700 transition">
+                        <span class="text-xl font-bold text-lime-400">Decolonizing the Dabba: Redefining Prestige</span>
+                        <span class="accordion-icon text-3xl text-lime-400 font-bold transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 pt-4 text-slate-300 space-y-4">
+                        <p>It’s not about abandoning depth; it’s about choosing where to apply it. The lie of scarcity was that only three career paths offered security. Today, stability comes from <em>mastery</em> in any niche you are passionate about.</p>
+                        <ul class="list-disc list-inside space-y-2 text-slate-200 ml-4">
+                            <li><strong>From Corporate Law to Environmental Justice:</strong> Applying rigorous legal skills to fight for social impact.</li>
+                            <li><strong>From Big Tech to Public Health Data:</strong> Using data science expertise to solve community crises, not just optimizing ad clicks.</li>
+                        </ul>
+                        <p class="font-bold text-lime-400">Honor the spirit of your heritage (dedication, excellence) without being tied to its specific job titles.</p>
+                    </div>
+                </div>
+
+                <!-- Accordion 2 -->
+                <div class="accordion-item rounded-xl overflow-hidden shadow-2xl border border-cyan-500/50" id="accordion-fryer">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center bg-slate-700/50 hover:bg-slate-700 transition">
+                        <span class="text-xl font-bold text-cyan-400">Reprogramming the Fryer: Balance as Efficiency</span>
+                        <span class="accordion-icon text-3xl text-lime-400 font-bold transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content px-6 pb-6 pt-4 text-slate-300 space-y-4">
+                        <p>The Air Fryer’s obsession with speed and output is the main cause of your burnout. We need to reprogram it to equate <strong>efficiency</strong> with <strong>sustainability</strong>.</p>
+                         <ul class="list-disc list-inside space-y-2 text-slate-200 ml-4">
+                            <li><strong>The Intentional Pause:</strong> The ultimate act of autonomy in hustle culture is taking a strategic break, like a sabbatical.</li>
+                            <li><strong>Prioritize Loan Payoff:</strong> Aggressively pay off the Guilt-Investment (student loans) to buy yourself career freedom sooner.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Accordion 3 -->
+                <div class="accordion-item rounded-xl overflow-hidden shadow-2xl border border-amber-500/50" id="accordion-scripts">
+                    <button class="accordion-header w-full text-left p-6 flex justify-between items-center bg-slate-700/50 hover:bg-slate-700 transition">
+                        <span class="text-xl font-bold text-amber-400">Scripts for Survival: Talking Back to the Masala Dabba</span>
+                        <span class="accordion-icon text-3xl text-lime-400 font-bold transform transition-transform duration-300">+</span>
+                    </button>
+                    <div id="scripts-content" class="accordion-content px-6 pb-6 pt-4 text-slate-300 space-y-6">
+                        <!-- Scripts injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-slate-800 my-16">
+        
+        <!-- Manifesto Section -->
+        <section id="manifesto" class="scroll-mt-20 bg-black text-white p-8 md:p-16 rounded-3xl shadow-2xl shadow-lime-900/50 max-w-4xl mx-auto border border-lime-400/50">
+             <div class="text-center mb-10">
+                <h3 class="text-4xl md:text-5xl font-extrabold text-white">The <span class="text-cyan-400">Hyphenated</span> Manifesto</h3>
+                <p class="max-w-2xl mx-auto mt-3 text-slate-400 text-lg">This is your life. This is your kitchen. Take the lead.</p>
+            </div>
+            <ul class="space-y-8 text-lg text-slate-200 max-w-xl mx-auto">
+                <li class="flex items-start">
+                    <span class="text-lime-400 mr-4 mt-1 text-2xl">⚡</span> 
+                    <p class="font-medium">I will redefine <strong>security</strong>. It is the freedom to choose my purpose, not a high job title. </p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-lime-400 mr-4 mt-1 text-2xl">⏱️</span> 
+                    <p class="font-medium">I will prioritize <strong>sustainable efficiency</strong>. My rest is not a reward; it is a necessary part of my long-term performance.</p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-lime-400 mr-4 mt-1 text-2xl">❤️</span> 
+                    <p class="font-medium">I will pay back the <strong>Guilt-Investment</strong> with my sustainable happiness, not my anxiety.</p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-lime-400 mr-4 mt-1 text-2xl">👩‍🍳</span> 
+                    <p class="font-medium">I am the <strong>Head Chef</strong> of my life. I will choose the ingredients, write the recipe, and decide when the meal is ready.</p>
+                </li>
+            </ul>
+             <p class="text-center text-xl font-extrabold mt-12 text-cyan-400 tracking-wider">Start cooking. The future is defined by you.</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-700 mt-16 md:mt-24">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+            <p>An interactive guide based on "The Hyphenated Hierarchy" by Venkat Matoory.</p>
+            <p class="text-sm mt-2">Designed to help you navigate identity, ambition, and family with intentionality.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const comparisonData = {
+            highSchool: {
+                masalaDabba: `
+                    <p><strong>The Goal:</strong> The Stream Grind. You're locked in early to Science, Commerce, or Humanities. The pressure is immense to nail competitive exams.</p>
+                    <p><strong>The Method:</strong> Focus is purely on academic horsepower. Extracurriculars are a low priority. Success rests on one high score.</p>
+                `,
+                airFryer: `
+                    <p><strong>The Goal:</strong> The Portfolio Builder. It's all about being well-rounded to build a "personal brand" for college apps—grades, sports, volunteering, and leadership.</p>
+                    <p><strong>The Method:</strong> You don't really have to choose a focus until sophomore year of college. Exploration is encouraged.</p>
+                `
+            },
+            college: {
+                masalaDabba: `
+                    <p><strong>The Goal:</strong> The Placement Machine. Getting into an elite college is the main event. The curriculum is theoretical, deep, and hyper-focused.</p>
+                    <p><strong>The Method:</strong> Career paths are secured through on-campus placements—a direct pipeline from school to job. The path is set.</p>
+                `,
+                airFryer: `
+                    <p><strong>The Goal:</strong> The Flexible Buffet. It’s the liberal arts model. Learning is practical, focused on projects, group work, and internships.</p>
+                    <p><strong>The Method:</strong> Networking is the assignment. Building connections is as important as your grades.</p>
+                `
+            },
+            workplace: {
+                masalaDabba: `
+                    <p><strong>The Goal:</strong> Hierarchy & Tenure. Career growth is often linear and hierarchical. Staying with a company long-term is respected. Success is linked to your academic pedigree.</p>
+                    <p><strong>The Method:</strong> Work-life balance can be blurred. You follow the lead of your seniors and wait your turn for promotions.</p>
+                `,
+                airFryer: `
+                    <p><strong>The Goal:</strong> The Individual & Job-Hopping Flex. It's a meritocracy that rewards individual performance and constant upskilling. </p>
+                    <p><strong>The Method:</strong> Switching jobs every few years is normalized and often the fastest way to get a raise or promotion. Work-life balance is a real, expected boundary.</p>
+                `
+            }
+        };
+
+        const quizData = {
+            questions: [
+                {
+                    section: "Traditional Values Conflict (Masala Dabba)",
+                    text: "When I tell my family about a career goal:",
+                    options: [
+                        { text: "They immediately ask about the salary, benefits, and how the job ranks against a doctor/engineer.", value: "A" },
+                        { text: "They listen and ask insightful questions about my personal satisfaction and challenges.", value: "B" }
+                    ]
+                },
+                {
+                    section: "Traditional Values Conflict (Masala Dabba)",
+                    text: "My main motivation for choosing a major/career path is:",
+                    options: [
+                        { text: "The potential for high status and financial security, so I can take care of my parents (the Guilt-Investment).", value: "A" },
+                        { text: "Genuine curiosity and desire to become an expert in the field, even if the salary is lower.", value: "B" }
+                    ]
+                },
+                {
+                    section: "Traditional Values Conflict (Masala Dabba)",
+                    text: "When a friend chooses an 'unconventional' career (e.g., teaching, art, non-profit work):",
+                    options: [
+                        { text: "I genuinely feel nervous for their financial future and wonder if they’ll regret it.", value: "A" },
+                        { text: "I admire their courage and feel a little jealous of their freedom.", value: "B" }
+                    ]
+                },
+                {
+                    section: "Modern Burnout Conflict (Air Fryer)",
+                    text: "My approach to school/work is best described as:",
+                    options: [
+                        { text: "Always running at 110%, trying to do everything perfectly, and feeling guilty when I take a break.", value: "A" },
+                        { text: "Focusing on quality work within sustainable hours, prioritizing rest and social time.", value: "B" }
+                    ]
+                },
+                {
+                    section: "Modern Burnout Conflict (Air Fryer)",
+                    text: "My free time is mostly spent:",
+                    options: [
+                        { text: "Scrolling on my phone, doing light research for my side hustle, or worrying about my to-do list.", value: "A" },
+                        { text: "Engaging in non-productive hobbies, spending time with friends, or simply relaxing without an agenda.", value: "B" }
+                    ]
+                },
+                {
+                    section: "Modern Burnout Conflict (Air Fryer)",
+                    text: "I believe my net worth is:",
+                    options: [
+                        { text: "Directly tied to my self-worth and my value to my family.", value: "A" },
+                        { text: "Completely separate from who I am as a person.", value: "B" }
+                    ]
+                }
+            ],
+            results: {
+                pressureCooker: {
+                    title: "⚠️ High Anxiety: You are in the Hybrid Pressure Cooker.",
+                    description: "Your choices are being dictated by external validation and fear of financial/social failure. You are likely experiencing high anxiety and are on a path to burnout. The Masala Dabba is calling the shots, and the Air Fryer is running too hot.",
+                    ctaText: "Focus on Redefinition: Decolonizing the Dabba",
+                    ctaLink: "#accordion-dabba"
+                },
+                crossroads: {
+                    title: "⚖️ Balance Point: You’re at a Crucial Crossroads.",
+                    description: "You are consciously fighting the external pressures, but the Guilt-Investment is still lurking. You know you need change, but you're not sure how to negotiate it. This guide is your blueprint for the Mindful Fusion.",
+                    ctaText: "Focus on Strategy: Reprogramming the Fryer",
+                    ctaLink: "#accordion-fryer"
+                },
+                pioneer: {
+                    title: "✅ Fusion Achieved: You’re a Mindful Pioneer!",
+                    description: "You’ve successfully asserted professional autonomy and defined success on your own terms. Your challenge is maintaining these boundaries and leading others by example.",
+                    ctaText: "Review Survival Scripts and The Manifesto",
+                    ctaLink: "#accordion-scripts"
+                }
+            }
+        };
+        
+        const scriptsData = [
+            {
+                problem: "Them: \"Why not take the MCAT? It’s the safest route.\"",
+                solution: "You: \"I understand, but the healthcare field is changing fast. My work in Health Tech Data Science is higher growth. I'm choosing a job that solves the industry's biggest problems—that’s the true definition of security now.\""
+            },
+            {
+                problem: "Them: \"Why did you quit that high-paying finance job?\"",
+                solution: "You: \"That job had high income but unsustainable hours, leading to burnout. I’m moving to a firm with better long-term efficiency and a 30% reduction in stress. This lets me dedicate 100% of my focus to growth, not just survival.\""
+            },
+            {
+                problem: "Them: \"Why are you seeing a therapist? Is something wrong with us?\"",
+                solution: "You: \"I am focused on maximizing my career performance. Therapy is a professional development tool—like getting a financial advisor for your money, I’m getting an advisor for my mind. This ensures I can handle the demands of my job without crashing.\""
+            }
+        ];
+
+        // --- FUNCTIONS ---
+        function updateComparison(stage) {
+            document.getElementById('masala-dabba-content').innerHTML = comparisonData[stage].masalaDabba;
+            document.getElementById('air-fryer-content').innerHTML = comparisonData[stage].airFryer;
+            
+            document.querySelectorAll('.comparison-btn').forEach(btn => {
+                btn.classList.remove('bg-lime-400', 'text-slate-900', 'hover:bg-lime-300');
+                btn.classList.add('bg-slate-700', 'text-white', 'hover:bg-slate-600');
+            });
+            
+            const activeBtn = document.querySelector(`button[onclick="updateComparison('${stage}')"]`);
+            activeBtn.classList.add('bg-lime-400', 'text-slate-900', 'hover:bg-lime-300');
+            activeBtn.classList.remove('bg-slate-700', 'text-white', 'hover:bg-slate-600');
+        }
+
+        function renderQuiz() {
+            const form = document.getElementById('quiz-form');
+            let currentSection = "";
+            quizData.questions.forEach((q, index) => {
+                if (q.section !== currentSection) {
+                    currentSection = q.section;
+                    const sectionTitle = document.createElement('h5');
+                    sectionTitle.className = "text-xl font-bold text-lime-400 mt-8 mb-4 border-l-4 border-cyan-400 pl-3";
+                    sectionTitle.textContent = currentSection;
+                    form.appendChild(sectionTitle);
+                }
+                const questionBlock = document.createElement('div');
+                questionBlock.className = "mb-6";
+                const questionText = document.createElement('p');
+                questionText.className = "font-semibold text-white mb-3";
+                questionText.textContent = `${index + 1}. ${q.text}`;
+                questionBlock.appendChild(questionText);
+                
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = "space-y-2";
+                q.options.forEach(opt => {
+                    const label = document.createElement('label');
+                    label.className = "flex items-center p-4 border border-slate-700 rounded-xl bg-slate-800 hover:bg-slate-700 cursor-pointer transition shadow-md";
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${index}`;
+                    radio.value = opt.value;
+                    radio.className = "h-5 w-5 text-lime-400 focus:ring-lime-500 border-slate-600 bg-slate-900";
+                    const span = document.createElement('span');
+                    span.className = "ml-4 text-slate-300 font-medium";
+                    span.textContent = opt.text;
+                    label.appendChild(radio);
+                    label.appendChild(span);
+                    optionsDiv.appendChild(label);
+                    // Add touch events for robustness on mobile
+                    label.addEventListener('touchstart', (e) => {
+                        e.stopPropagation(); // Prevent accidental scrolling
+                        radio.checked = true; // Check the radio button on touch
+                    });
+                });
+                questionBlock.appendChild(optionsDiv);
+                form.appendChild(questionBlock);
+            });
+        }
+        
+        let myChart;
+        function submitQuiz() {
+            const form = document.getElementById('quiz-form'); 
+            const submitBtn = document.getElementById('submit-quiz-btn');
+            const msgElement = document.getElementById('quiz-message');
+            const ctaElement = document.getElementById('dynamic-cta');
+            const answers = new FormData(form); 
+            
+            // Masala Dabba Conflict (A count in Q1-Q3) vs Air Fryer Autonomy (B count in Q4-Q6)
+            let masalaDabbaPressure = 0; // A count in Q1, Q2, Q3
+            let airFryerAutonomy = 0;   // B count in Q1, Q2, Q3, Q4, Q5, Q6
+
+            msgElement.classList.add('hidden');
+
+            for (let i = 0; i < quizData.questions.length; i++) {
+                const answer = answers.get(`question-${i}`);
+                if (!answer) {
+                     msgElement.textContent = "Please answer all six questions before submitting your result.";
+                     msgElement.classList.remove('hidden');
+                     return;
+                }
+                if (i < 3 && answer === 'A') { // Q1-Q3 'A' = Traditional Pressure
+                    masalaDabbaPressure++;
+                }
+                if (answer === 'B') { // Q1-Q6 'B' = Autonomy/Balance
+                    airFryerAutonomy++;
+                }
+            }
+            
+            // Total 'A' count for Burnout Vulnerability (A in Q1-Q6)
+            const burnoutVulnerability = quizData.questions.length - airFryerAutonomy; 
+            
+            let resultKey;
+            // High Pressure: Masala Dabba Pressure > 2 AND Autonomy < 4
+            if (masalaDabbaPressure >= 2 && airFryerAutonomy <= 3) {
+                resultKey = 'pressureCooker';
+            } 
+            // Pioneer: High Autonomy (B count >= 5)
+            else if (airFryerAutonomy >= 5) {
+                resultKey = 'pioneer';
+            } 
+            // Crossroads: In between
+            else {
+                resultKey = 'crossroads';
+            }
+            
+            const result = quizData.results[resultKey];
+            document.getElementById('result-title').textContent = result.title;
+            document.getElementById('result-description').textContent = result.description;
+            ctaElement.textContent = result.ctaText;
+            ctaElement.href = result.ctaLink;
+
+            document.getElementById('quiz-result').classList.remove('hidden');
+            
+            // Hide form and button on successful submission
+            submitBtn.style.display = 'none';
+            form.style.display = 'none';
+
+            // Chart Configuration
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            if (myChart) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Masala Dabba Pressure', 'Air Fryer Autonomy', 'Burnout Vulnerability'],
+                    datasets: [{
+                        label: 'Your Profile',
+                        data: [masalaDabbaPressure, airFryerAutonomy, burnoutVulnerability], // Data points
+                        backgroundColor: 'rgba(163, 230, 53, 0.2)', /* lime-400 */
+                        borderColor: 'rgba(163, 230, 53, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(6, 182, 212, 1)', /* cyan-500 */
+                        pointBorderColor: '#0f172a',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(163, 230, 53, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#334155' /* slate-700 */
+                            },
+                            grid: {
+                                color: '#334155' /* slate-700 */
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 14,
+                                    weight: '600'
+                                },
+                                color: '#f8fafc' /* slate-50 */
+                            },
+                            ticks: {
+                                backdropColor: '#0f172a', /* slate-900 for high contrast */
+                                color: '#e2e8f0', /* slate-200 */
+                                stepSize: 1,
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 6
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            document.getElementById('quiz-result').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderScripts() {
+            const container = document.getElementById('scripts-content');
+            scriptsData.forEach(script => {
+                const div = document.createElement('div');
+                div.className = "bg-slate-700/70 p-4 rounded-lg border border-slate-600";
+                const problem = document.createElement('p');
+                problem.className = "font-semibold text-slate-200 italic border-b border-slate-600 pb-2 mb-2";
+                problem.textContent = script.problem;
+                const solution = document.createElement('p');
+                solution.innerHTML = `<span class="font-bold text-lime-400">Your Script:</span> ${script.solution}`;
+                div.appendChild(problem);
+                div.appendChild(solution);
+                container.appendChild(div);
+            });
+        }
+        
+        // --- EVENT LISTENERS ---
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.accordion-icon');
+                
+                const isOpening = content.style.maxHeight === '0px' || !content.style.maxHeight;
+
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
+                document.querySelectorAll('.accordion-icon').forEach(i => {
+                    i.style.transform = 'rotate(0deg)';
+                    i.textContent = '+';
+                });
+                
+                // Open the clicked one
+                if (isOpening) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.style.transform = 'rotate(45deg)';
+                    icon.textContent = '×';
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render state
+            updateComparison('highSchool');
+            renderQuiz();
+            renderScripts();
+            
+            // Set initial state for accordions
+            document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
+
+            // Scrollspy logic
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-30% 0px -70% 0px' });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Custom smooth scroll logic
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Offset for sticky header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
